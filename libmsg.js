@@ -41,10 +41,35 @@ oicq=oicq_1;
 
 
 var score_buy=function(uid,gid,inp){
-return libmain.buy(uid,gid,name,parm1);
+inp=inp.replaceAll("\r","");
+inp=inp.replaceAll("\n","");
+inp=inp.replaceAll("\t","");
+var olen=0;
+while(olen!=inp.length){
+olen=inp.length;
+inp=inp.replaceAll("  "," ");
+if(inp.substr(0,1)==" "){
+inp=inp.substr(1);
+}
+if(inp.substr(inp.length-1)==" "){
+inp=inp.substr(0,inp.length-1);
+}
+}
+inp=inp.split(" ",2);
+if(inp.length<=0){
+inp.push("");
+}
+if(inp.length<=1){
+inp.push("");
+}
+return libmain.buy(uid,gid,inp[0],inp[1]);
 };
 
 var item_use=function(uid,gid,inp){
+inp=inp.replaceAll("\r","");
+inp=inp.replaceAll("\n","");
+inp=inp.replaceAll("\t","");
+inp=inp.replaceAll(" ","");
 return libmain.use(uid,gid,name,count);
 };
 
