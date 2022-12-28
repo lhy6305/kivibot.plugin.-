@@ -1,0 +1,33 @@
+{
+  "group": 608391254,
+  "unit": "积分",
+  "newbie": 20,
+  "remedy": 30,
+  "admin": {
+    "backup": "#备份签到",
+    "count": "#签到统计"
+  },
+  "user": {
+    "sign": "签到",
+    "rank": "积分排行",
+    "mine": "我的积分",
+    "buy": "积分兑换",
+    "buy_preview": "预览",
+    "buy_custom_title": "头衔",
+    "buy_custom_title_rule": "function(len){return Math.round(2+len/2+Math.max((len-5)*2,0));}",
+    "duan": [
+      {
+        "title": "duan_0",
+        "score": 0
+      },
+      {
+        "title": "duan_1",
+        "score": 21
+      },
+      {
+        "title": "duan_2",
+        "score": 22
+      }
+    ]
+  }
+}
