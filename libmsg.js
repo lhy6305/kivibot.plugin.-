@@ -41,11 +41,11 @@ oicq=oicq_1;
 
 
 var score_buy=function(uid,gid,inp){
-return libmain.buy();
+return libmain.buy(uid,gid,name,parm1);
 };
 
 var item_use=function(uid,gid,inp){
-return libmain.useitem();
+return libmain.use(uid,gid,name,count);
 };
 
 
@@ -117,6 +117,17 @@ break;
 if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("我的物品")){
 try{
 var res=libmain.myitem(uid,gid);
+jo.reply(res);
+}catch(e){
+console.error(e);
+jo.reply("函数执行出错 libmsg@L??");
+}
+break;
+}
+
+if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("物品使用")){
+try{
+var res=item_use(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
