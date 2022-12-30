@@ -67,6 +67,12 @@ return true;
 
 libmain.sign=function(uid,gid){
 var sf=getsave();
+if(!(gid in sf)){
+sf[gid]={};
+}
+if(!(uid in sf[gid])){
+sf[gid][uid]={"total":0,"continue":0,"lastsign":0,"customTitle":""};
+}
 };
 
 libmain.score_ranking=function(gid){
@@ -96,6 +102,22 @@ delete obj[a]["config"];
 delete obj[a]["store"];
 for(var b in obj[a]["userData"]){
 obj[a][b]=obj[a]["userData"][b];
+if("LastSignTime" in obj[a][b]){
+obj[a][b]["lastsign"]=obj[a][b]["LastSignTime"];
+delete obj[a][b]["LastSignTime"];
+}
+if(!("total" in obj[a][b])){
+obj[a][b]["total"]=0;
+}
+if(!("continue" in obj[a][b])){
+obj[a][b]["continue"]=0;
+}
+if(!("lastsign" in obj[a][b])){
+obj[a][b]["lastsign"]=0;
+}
+if(!("customTitle" in obj[a][b])){
+obj[a][b]["customTitle"]="";
+}
 }
 delete obj[a]["userData"];
 }
