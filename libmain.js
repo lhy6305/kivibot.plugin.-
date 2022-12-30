@@ -81,11 +81,11 @@ sf[gid]={};
 var flag_cansign=false;
 var flag_newusr=false;
 if(!(uid in sf[gid])){
-sf[gid][uid]={"total":0,"continue":0,"lastsign":0,"customTitle":""};
+sf[gid][uid]={"scores":0,"continue":0,"lastsign":0,"customTitle":""};
 flag_newusr=true;
 }
-if(!("total" in sf[gid][uid])){
-sf[gid][uid]["total"]=0;
+if(!("scores" in sf[gid][uid])){
+sf[gid][uid]["scores"]=0;
 }
 if(!("continue" in sf[gid][uid])){
 sf[gid][uid]["continue"]=0;
@@ -110,7 +110,7 @@ var addscore=Math.max(Math.min(sf[gid][uid]["continue"],7),0);
 var res="["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" ";
 res+="签到成功";
 res+="，获得"+addscore+"积分";
-sf[gid][uid]["total"]+=addscore;
+sf[gid][uid]["scores"]+=addscore;
 if(flag_newusr){
 addscore+=20;
 res+="，🧧已为你额外加成首签20积分";
@@ -131,11 +131,37 @@ return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fa
 if(!(gid in sf)||!(uid in sf[gid])){
 return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L132";
 }
-return oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["total"];
+return oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["scores"];
 };
 
 libmain.group_ranking=function(gid){
-
+var sf=getsave();
+if(sf===false){
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L140";
+}
+if(!(gid in sf)){
+return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L143";
+}
+var arr=[];
+for(var a in Object.keys(sf[gid])){
+var b={};
+b["uin"]=a;
+b["scores"]=sf[gid][a]["scores"];
+b["continue"]=sf[gid][a]["continue"];
+b["lastsign"]=sf[gid][a]["lastsign"];
+b["customTitle"]=sf[gid][a]["customTitle"];
+arr.push(b);
+}
+var res="=== 🎇积分排行榜🎇 ===";
+arr.sort(function(a,b){return b["scores"]-a["scores"]});
+for(var a=1;a<=Math.min(10,arr.length);a++){
+res+="🎇第 "+a+" 名：";
+res+=oicq.cqcode.at(arr[a-1]["uin"],undefined,true);
+res+="🧧共 "+arr[a-1]["scores"]+" 积分";
+res+="，连签 "+arr[a-1]["continue"]+" 天";
+res+="\r\n";
+}
+return res;
 };
 
 libmain.myitem=function(uid,gid){
@@ -161,8 +187,12 @@ if("LastSignTime" in obj[a][b]){
 obj[a][b]["lastsign"]=obj[a][b]["LastSignTime"];
 delete obj[a][b]["LastSignTime"];
 }
-if(!("total" in obj[a][b])){
-obj[a][b]["total"]=0;
+if("total" in obj[a][b]){
+obj[a][b]["scores"]=obj[a][b]["total"];
+delete obj[a][b]["total"];
+}
+if(!("scores" in obj[a][b])){
+obj[a][b]["scores"]=0;
 }
 if(!("continue" in obj[a][b])){
 obj[a][b]["continue"]=0;
