@@ -98,7 +98,7 @@ flag_cansign=true;
 }
 sf=setsave(sf);
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L89";
+return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L101";
 }
 if(!flag_cansign){
 return "["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" "+"今天已经签过了";
