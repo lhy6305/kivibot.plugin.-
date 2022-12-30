@@ -89,7 +89,7 @@ libmain.use=function(uid,gid,name,count){
 
 };
 
-var addi_cookconfig=function(){
+libmain.cookconfig_runonce=function(){
 var obj=getsave();
 for(var a in obj){
 delete obj[a]["config"];
