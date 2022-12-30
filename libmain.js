@@ -143,13 +143,14 @@ if(!(gid in sf)){
 return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L143";
 }
 var arr=[];
-for(var a in Object.keys(sf[gid])){
+var kl=Object.keys(sf[gid]);
+for(var a in kl){
 var b={};
-b["uin"]=a;
-b["scores"]=sf[gid][a]["scores"];
-b["continue"]=sf[gid][a]["continue"];
-b["lastsign"]=sf[gid][a]["lastsign"];
-b["customTitle"]=sf[gid][a]["customTitle"];
+b["uin"]=kl[a];
+b["scores"]=sf[gid][kl[a]]["scores"];
+b["continue"]=sf[gid][kl[a]]["continue"];
+b["lastsign"]=sf[gid][kl[a]]["lastsign"];
+b["customTitle"]=sf[gid][kl[a]]["customTitle"];
 arr.push(b);
 }
 var res="=== 🎇积分排行榜🎇 ===";
