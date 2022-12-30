@@ -16,7 +16,7 @@ throw "error: cannot access or require fileio. libmain@L15";
 }
 fileio=fileio_1;
 }
-/*
+
 //import oicq
 if(typeof oicq!="object"){
 if(typeof oicq=="undefined"){
@@ -32,21 +32,23 @@ throw "error: cannot access or require oicq. libmain@L31";
 }
 oicq=oicq_1;
 }
-*/
+
 
 var libmain={};
 
+libmain.savepath="savefile.json";
+
 var getsave=function(){
-var res=fileio.file_get_contents("savefile.json");
+var res=fileio.file_get_contents(libmain.savepath);
 if(res===false){
-console.warn("warn: cannot get save file. use empty object instead. libmain@L42");
+console.warn("warn: cannot get save file. use empty object instead. libmain@L44");
 return {};
 }
 try{
 res=JSON.parse(res);
 }catch(e){
 console.error(e);
-throw "error: cannot parse save file as json object. libmain@L49";
+throw "error: cannot parse save file as json object. libmain@L51";
 }
 return res;
 };
@@ -56,12 +58,12 @@ try{
 obj=JSON.stringify(obj);
 }catch(e){
 console.error(e);
-console.error("error: cannot stringify input as json. libmain@L59");
+console.error("error: cannot stringify input as json. libmain@L61");
 return false;
 }
-obj=fileio.file_put_contents("savefile.json",obj);
+obj=fileio.file_put_contents(libmain.savepath,obj);
 if(obj===false){
-console.error("error: cannot write save file. libmain@L64");
+console.error("error: cannot write save file. libmain@L66");
 return false;
 }
 return true;
@@ -84,7 +86,13 @@ flag_cansign=true;
 }
 sf=setsave(sf);
 if(sf===false){
-return "🧧数据写入失败，请联系管理员🧧 libmain@L87";
+return oicq.cqcode.at(uid)+"🧧数据写入失败，请联系管理员🧧 libmain@L87";
+}
+if(!flag_cansign){
+return oicq.cqcode.at(uid)+"🧧今天已经签过了🧧";
+}
+if(flag_newusr){
+sf[gid][uid]["total"]+=20;
 }
 };
 
