@@ -56,11 +56,13 @@ try{
 obj=JSON.stringify(obj);
 }catch(e){
 console.error(e);
-throw "error: cannot stringify input as json. libmain@L59";
+console.error("error: cannot stringify input as json. libmain@L59");
+return false;
 }
 obj=fileio.file_put_contents("savefile.json",obj);
 if(obj===false){
-throw "error: cannot write save file. libmain@L63";
+console.error("error: cannot write save file. libmain@L64");
+return false;
 }
 return true;
 };
@@ -70,8 +72,19 @@ var sf=getsave();
 if(!(gid in sf)){
 sf[gid]={};
 }
+var flag_cansign=false;
+var flag_newusr=false;
 if(!(uid in sf[gid])){
 sf[gid][uid]={"total":0,"continue":0,"lastsign":0,"customTitle":""};
+flag_newusr=true;
+}
+var todayzero=(new Date().setHours(0,0,0,0))/100000;
+if(lastsign<todayzero){
+flag_cansign=true;
+}
+sf=setsave(sf);
+if(sf===false){
+return "🧧数据写入失败，请联系管理员🧧 libmain@L87";
 }
 };
 
