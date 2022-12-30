@@ -110,11 +110,11 @@ var addscore=Math.max(Math.min(sf[gid][uid]["continue"],7),0);
 var res=sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" ";
 res+="签到成功";
 res+="，获得"+addscore+"积分";
-sf[gid][uid]["scores"]+=addscore;
 if(flag_newusr){
 addscore+=20;
 res+="，🧧已为你额外加成首签20积分";
 }
+sf[gid][uid]["scores"]+=addscore;
 res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧";
 sf=setsave(sf);
 if(sf===false){
