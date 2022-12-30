@@ -80,20 +80,43 @@ if(!(uid in sf[gid])){
 sf[gid][uid]={"total":0,"continue":0,"lastsign":0,"customTitle":""};
 flag_newusr=true;
 }
+if(!("total" in sf[gid][uid])){
+sf[gid][uid]["total"]=0;
+}
+if(!("continue" in sf[gid][uid])){
+sf[gid][uid]["continue"]=0;
+}
+if(!("lastsign" in sf[gid][uid])){
+sf[gid][uid]["lastsign"]=0;
+}
+if(!("customTitle" in sf[gid][uid])){
+sf[gid][uid]["customTitle"]="";
+}
 var todayzero=(new Date().setHours(0,0,0,0))/100000;
 if(lastsign<todayzero){
 flag_cansign=true;
 }
 sf=setsave(sf);
 if(sf===false){
-return oicq.cqcode.at(uid)+"🧧数据写入失败，请联系管理员🧧 libmain@L87";
+return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L89";
 }
 if(!flag_cansign){
-return oicq.cqcode.at(uid)+"🧧今天已经签过了🧧";
+return "["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" "+"今天已经签过了";
 }
+sf[gid][uid]["continue"]=Math.max(0,sf[gid][uid]["continue"]);
+sf[gid][uid]["continue"]+=1;
+var addscore=Math.max(Math.min(sf[gid][uid]["continue"],7),0);
+var res="["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" ";
+res+="签到成功";
+res+="，获得"+addscore+"积分";
+sf[gid][uid]["total"]+=addscore;
 if(flag_newusr){
-sf[gid][uid]["total"]+=20;
+addscore+=20;
+res+="，🧧已为你额外加成首签20积分";
 }
+setsave(sf);
+res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧"
+return res;
 };
 
 libmain.score_ranking=function(gid){
