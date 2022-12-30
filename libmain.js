@@ -101,13 +101,13 @@ if(sf[gid][uid]["lastsign"]<todayzero){
 flag_cansign=true;
 }
 if(!flag_cansign){
-return "["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" "+"今天已经签过了";
+return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"今天已经签过了";
 }
 sf[gid][uid]["lastsign"]=(Date.now()/100000).toFixed(0);
 sf[gid][uid]["continue"]=Math.max(0,sf[gid][uid]["continue"]);
 sf[gid][uid]["continue"]+=1;
 var addscore=Math.max(Math.min(sf[gid][uid]["continue"],7),0);
-var res="["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" ";
+var res=sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" ";
 res+="签到成功";
 res+="，获得"+addscore+"积分";
 sf[gid][uid]["scores"]+=addscore;
@@ -115,11 +115,11 @@ if(flag_newusr){
 addscore+=20;
 res+="，🧧已为你额外加成首签20积分";
 }
+res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧";
 sf=setsave(sf);
 if(sf===false){
 return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L120";
 }
-res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧"
 return res;
 };
 
@@ -131,7 +131,7 @@ return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fa
 if(!(gid in sf)||!(uid in sf[gid])){
 return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L132";
 }
-return oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["scores"];
+return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["scores"];
 };
 
 libmain.group_ranking=function(gid){
@@ -157,7 +157,7 @@ arr.sort(function(a,b){return b["scores"]-a["scores"]});
 var todayzero=(new Date().setHours(0,0,0,0))/100000;
 for(var a=1;a<=Math.min(10,arr.length);a++){
 res+="\r\n🎇第 "+a+" 名：";
-res+="["+arr[a-1]["customTitle"]+"]"+oicq.cqcode.at(arr[a-1]["uin"],undefined,true);
+res+=arr[a-1]["customTitle"]+oicq.cqcode.at(arr[a-1]["uin"],undefined,true);
 res+="🧧共 "+arr[a-1]["scores"]+" 积分";
 if(arr[a-1]["lastsign"]>=todayzero){
 res+="，连签 "+arr[a-1]["continue"]+" 天";
