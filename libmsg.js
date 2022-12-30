@@ -136,7 +136,7 @@ break;
 
 if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("积分排行")){
 try{
-var res=libmain.score_ranking(gid);
+var res=libmain.group_ranking(gid);
 jo.reply(res);
 }catch(e){
 console.error(e);

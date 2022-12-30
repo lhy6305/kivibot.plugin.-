@@ -131,10 +131,10 @@ return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fa
 if(!(gid in sf)||!(uid in sf[gid])){
 return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L132";
 }
-return "你当前拥有积分";
+return oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["total"];
 };
 
-libmain.score_ranking=function(gid){
+libmain.group_ranking=function(gid){
 
 };
 
