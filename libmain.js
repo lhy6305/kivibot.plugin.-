@@ -103,6 +103,7 @@ return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 
 if(!flag_cansign){
 return "["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" "+"今天已经签过了";
 }
+sf[gid][uid]["lastsign"]=(Date.now()/100000).toFixed(0);
 sf[gid][uid]["continue"]=Math.max(0,sf[gid][uid]["continue"]);
 sf[gid][uid]["continue"]+=1;
 var addscore=Math.max(Math.min(sf[gid][uid]["continue"],7),0);
