@@ -36,8 +36,37 @@ oicq=oicq_1;
 
 var libmain={};
 
-libmain.sign=function(uid,gid){
+var getsave=function(){
+var res=fileio.file_get_contents("savefile.json");
+if(res===false){
+console.warn("warn: cannot get save file. use empty object instead. libmain@L42");
+return {};
+}
+try{
+res=JSON.parse(res);
+}catch(e){
+console.error(e);
+throw "error: cannot parse save file as json object. libmain@L49";
+}
+return res;
+};
 
+var setsave=function(obj){
+try{
+obj=JSON.stringify(obj);
+}catch(e){
+console.error(e);
+throw "error: cannot stringify input as json. libmain@L59";
+}
+obj=fileio.file_put_contents("savefile.json",obj);
+if(obj===false){
+throw "error: cannot write save file. libmain@L63";
+}
+return true;
+};
+
+libmain.sign=function(uid,gid){
+var sf=getsave();
 };
 
 libmain.score_ranking=function(gid){
@@ -60,6 +89,12 @@ libmain.use(uid,gid,name,count){
 
 };
 
+var addi_cookconfig=function(obj){
+for(var a in obj){
+delete obj[a]["config"];
+delete obj[a]["store"];
+}
+};
 
 
 if(typeof window==="object"){
