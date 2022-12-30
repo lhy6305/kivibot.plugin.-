@@ -1,0 +1,6 @@
+{
+"name":"补签卡",
+"cost":7,
+"effect":"function(){}",
+"max_hold":5
+}

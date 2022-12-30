@@ -129,7 +129,7 @@ var res=libmain.sign(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L132");
 }
 break;
 }
@@ -140,7 +140,7 @@ var res=libmain.score_ranking(gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L143");
 }
 break;
 }
@@ -151,7 +151,7 @@ var res=libmain.myscore(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L154");
 }
 break;
 }
@@ -162,7 +162,7 @@ var res=libmain.myitem(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L165");
 }
 break;
 }
@@ -173,7 +173,7 @@ var res=item_use(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L176");
 }
 break;
 }
@@ -184,7 +184,7 @@ var res=score_buy(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L??");
+jo.reply("函数执行出错 libmsg@L187");
 }
 break;
 }

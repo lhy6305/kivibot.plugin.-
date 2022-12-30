@@ -96,10 +96,6 @@ var todayzero=(new Date().setHours(0,0,0,0))/100000;
 if(lastsign<todayzero){
 flag_cansign=true;
 }
-sf=setsave(sf);
-if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L101";
-}
 if(!flag_cansign){
 return "["+sf[gid][uid]["customTitle"]+"]"+oicq.cqcode.at(uid)+" "+"今天已经签过了";
 }
@@ -115,7 +111,10 @@ if(flag_newusr){
 addscore+=20;
 res+="，🧧已为你额外加成首签20积分";
 }
-setsave(sf);
+sf=setsave(sf);
+if(sf===false){
+return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L116";
+}
 res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧"
 return res;
 };
@@ -125,7 +124,7 @@ libmain.score_ranking=function(gid){
 };
 
 libmain.myscore=function(uid,gid){
-
+return "你当前拥有积分";
 };
 
 libmain.myitem=function(uid,gid){
