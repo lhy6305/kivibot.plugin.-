@@ -48,7 +48,8 @@ try{
 res=JSON.parse(res);
 }catch(e){
 console.error(e);
-throw "error: cannot parse save file as json object. libmain@L51";
+console.error("error: cannot parse save file as json object. libmain@L51");
+return false;
 }
 return res;
 };
@@ -58,12 +59,12 @@ try{
 obj=JSON.stringify(obj);
 }catch(e){
 console.error(e);
-console.error("error: cannot stringify input as json. libmain@L61");
+console.error("error: cannot stringify input as json. libmain@L62");
 return false;
 }
 obj=fileio.file_put_contents(libmain.savepath,obj);
 if(obj===false){
-console.error("error: cannot write save file. libmain@L66");
+console.error("error: cannot write save file. libmain@L67");
 return false;
 }
 return true;
@@ -71,6 +72,9 @@ return true;
 
 libmain.sign=function(uid,gid){
 var sf=getsave();
+if(sf===false){
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L76";
+}
 if(!(gid in sf)){
 sf[gid]={};
 }
@@ -113,18 +117,25 @@ res+="，🧧已为你额外加成首签20积分";
 }
 sf=setsave(sf);
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦数据写入失败，请联系管理员 libmain@L116";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L120";
 }
 res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧"
 return res;
 };
 
-libmain.score_ranking=function(gid){
-
+libmain.myscore=function(uid,gid){
+var sf=getsave();
+if(sf===false){
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L129";
+}
+if(!(gid in sf)||!(uid in sf[gid])){
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L132";
+}
+return "你当前拥有积分";
 };
 
-libmain.myscore=function(uid,gid){
-return "你当前拥有积分";
+libmain.score_ranking=function(gid){
+
 };
 
 libmain.myitem=function(uid,gid){
