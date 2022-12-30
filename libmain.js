@@ -16,7 +16,7 @@ throw "error: cannot access or require fileio. libmain@L15";
 }
 fileio=fileio_1;
 }
-
+/*
 //import oicq
 if(typeof oicq!="object"){
 if(typeof oicq=="undefined"){
@@ -32,7 +32,7 @@ throw "error: cannot access or require oicq. libmain@L31";
 }
 oicq=oicq_1;
 }
-
+*/
 
 var libmain={};
 
@@ -81,19 +81,25 @@ libmain.myitem=function(uid,gid){
 
 };
 
-libmain.buy(uid,gid,name,parm1){
+libmain.buy=function(uid,gid,name,parm1){
 
 };
 
-libmain.use(uid,gid,name,count){
+libmain.use=function(uid,gid,name,count){
 
 };
 
-var addi_cookconfig=function(obj){
+var addi_cookconfig=function(){
+var obj=getsave();
 for(var a in obj){
 delete obj[a]["config"];
 delete obj[a]["store"];
+for(var b in obj[a]["userData"]){
+obj[a][b]=obj[a]["userData"][b];
 }
+delete obj[a]["userData"];
+}
+setsave(obj);
 };
 
 
