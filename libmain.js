@@ -36,7 +36,7 @@ oicq=oicq_1;
 
 var libmain={};
 
-libmain.savepath="savefile.json";
+libmain.savepath="./savefile.json";
 
 var getsave=function(){
 var res=fileio.file_get_contents(libmain.savepath);

@@ -121,6 +121,10 @@ var gid=jo["group_id"];
 for(var index=0;index<jo["message"].length;index++){
 var cdata=jo["message"][index];
 
+//libmain fix
+
+libmain.savepath=__dirname+"/"+"savefile.json";
+
 //message handler
 
 if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("签到")){
@@ -129,7 +133,7 @@ var res=libmain.sign(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L132");
+jo.reply("函数执行出错 libmsg@L136");
 }
 break;
 }
@@ -140,7 +144,7 @@ var res=libmain.group_ranking(gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L143");
+jo.reply("函数执行出错 libmsg@L147");
 }
 break;
 }
@@ -151,7 +155,7 @@ var res=libmain.myscore(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L154");
+jo.reply("函数执行出错 libmsg@L158");
 }
 break;
 }
@@ -162,7 +166,7 @@ var res=libmain.myitem(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L165");
+jo.reply("函数执行出错 libmsg@L169");
 }
 break;
 }
@@ -173,7 +177,7 @@ var res=item_use(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L176");
+jo.reply("函数执行出错 libmsg@L180");
 }
 break;
 }
@@ -184,7 +188,7 @@ var res=score_buy(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("函数执行出错 libmsg@L187");
+jo.reply("函数执行出错 libmsg@L191");
 }
 break;
 }
