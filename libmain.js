@@ -97,7 +97,7 @@ if(!("customTitle" in sf[gid][uid])){
 sf[gid][uid]["customTitle"]="";
 }
 var todayzero=(new Date().setHours(0,0,0,0))/100000;
-if(lastsign<todayzero){
+if(sf[gid][uid]["lastsign"]<todayzero){
 flag_cansign=true;
 }
 if(!flag_cansign){
