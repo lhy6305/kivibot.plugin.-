@@ -154,11 +154,14 @@ arr.push(b);
 }
 var res="=== 🎇积分排行榜🎇 ===";
 arr.sort(function(a,b){return b["scores"]-a["scores"]});
+var todayzero=(new Date().setHours(0,0,0,0))/100000;
 for(var a=1;a<=Math.min(10,arr.length);a++){
 res+="🎇第 "+a+" 名：";
-res+=oicq.cqcode.at(arr[a-1]["uin"],undefined,true);
+res+="["+arr[a-1]["customTitle"]+"]"+oicq.cqcode.at(arr[a-1]["uin"],undefined,true);
 res+="🧧共 "+arr[a-1]["scores"]+" 积分";
+if(arr[a-1]["lastsign"]>=todayzero){
 res+="，连签 "+arr[a-1]["continue"]+" 天";
+}
 res+="\r\n";
 }
 return res;
