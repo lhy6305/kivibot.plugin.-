@@ -205,6 +205,8 @@ obj[a][b]["lastsign"]=0;
 }
 if(!("customTitle" in obj[a][b])){
 obj[a][b]["customTitle"]="";
+}else{
+obj[a][b]["customTitle"]="["+obj[a][b]["customTitle"]+"]";
 }
 }
 delete obj[a]["userData"];
