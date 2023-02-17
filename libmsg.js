@@ -98,9 +98,9 @@ libmsg.handler_onmsg=function(jo){
 if(jo["message_type"]!="group"){ //group only
 return;
 }
-if(jo["group_id"]!==271484982){
-return;
-}
+//if(jo["group_id"]!==271484982){
+//return;
+//}
 //合并连续的text块
 if(!(jo["message"] instanceof Array)) {
 return; //internal error
