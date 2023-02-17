@@ -139,7 +139,7 @@ if(sf===false){
 reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L139");
 return;
 }
-reply(res);
+libyiyan.get(reply,res);
 return;
 };
 
@@ -197,41 +197,6 @@ libmain.myitem=function(uid,gid){
 
 libmain.use=function(uid,gid,name,count){
 
-};
-
-libmain.cookconfig_runonce=function(){
-var obj=getsave();
-for(var a in obj){
-delete obj[a]["config"];
-delete obj[a]["store"];
-for(var b in obj[a]["userData"]){
-obj[a][b]=obj[a]["userData"][b];
-if("LastSignTime" in obj[a][b]){
-obj[a][b]["lastsign"]=obj[a][b]["LastSignTime"];
-delete obj[a][b]["LastSignTime"];
-}
-if("total" in obj[a][b]){
-obj[a][b]["scores"]=obj[a][b]["total"];
-delete obj[a][b]["total"];
-}
-if(!("scores" in obj[a][b])){
-obj[a][b]["scores"]=0;
-}
-if(!("continue" in obj[a][b])){
-obj[a][b]["continue"]=0;
-}
-if(!("lastsign" in obj[a][b])){
-obj[a][b]["lastsign"]=0;
-}
-if(!("customTitle" in obj[a][b])){
-obj[a][b]["customTitle"]="";
-}else{
-obj[a][b]["customTitle"]="["+obj[a][b]["customTitle"]+"]";
-}
-}
-delete obj[a]["userData"];
-}
-setsave(obj);
 };
 
 
