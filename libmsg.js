@@ -159,7 +159,7 @@ jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L158");
 }
 break;
 }
-
+/*
 if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("我的物品")){
 try{
 var res=libmain.myitem(uid,gid);
@@ -192,7 +192,7 @@ jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L191");
 }
 break;
 }
-
+*/
 
 //end of foreach loop
 }
