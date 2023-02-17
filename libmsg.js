@@ -34,25 +34,6 @@ throw "error: cannot access or require oicq. libmsg@L32";
 oicq=oicq_1;
 }
 
-//import libyiyan
-if(typeof libyiyan!="object"){
-if(typeof libyiyan=="undefined"){
-var libyiyan;
-}
-let libyiyan_1=libyiyan;
-if(typeof require=="function"){
-libyiyan_1=require("./libyiyan.js");
-}
-if(typeof libyiyan_1!="object"){
-console.error("error: cannot access or require libyiyan. libmsg@L47");
-throw "error: cannot access or require libyiyan. libmsg@L48";
-}
-libyiyan=libyiyan_1;
-}
-
-
-
-
 
 
 
@@ -148,7 +129,7 @@ try{
 libmain.sign(uid,gid,jo.reply);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L151");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L132");
 }
 break;
 }
@@ -159,7 +140,7 @@ var res=libmain.group_ranking(gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L162");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L143");
 }
 break;
 }
@@ -170,7 +151,7 @@ var res=libmain.myscore(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L173");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L154");
 }
 break;
 }
@@ -181,7 +162,7 @@ var res=libmain.myitem(uid,gid);
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L184");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L165");
 }
 break;
 }
@@ -192,7 +173,7 @@ var res=item_use(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L195");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L176");
 }
 break;
 }
@@ -203,7 +184,7 @@ var res=score_buy(uid,gid,cdata["data"]["text"].substr(4));
 jo.reply(res);
 }catch(e){
 console.error(e);
-jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L206");
+jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L187");
 }
 break;
 }

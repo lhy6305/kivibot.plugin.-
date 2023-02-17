@@ -33,6 +33,22 @@ throw "error: cannot access or require oicq. libmain@L31";
 oicq=oicq_1;
 }
 
+//import libyiyan
+if(typeof libyiyan!="object"){
+if(typeof libyiyan=="undefined"){
+var libyiyan;
+}
+let libyiyan_1=libyiyan;
+if(typeof require=="function"){
+libyiyan_1=require("./libyiyan.js");
+}
+if(typeof libyiyan_1!="object"){
+console.error("error: cannot access or require libyiyan. libmain@L47");
+throw "error: cannot access or require libyiyan. libmain@L48";
+}
+libyiyan=libyiyan_1;
+}
+
 
 var libmain={};
 
@@ -41,14 +57,14 @@ libmain.savepath="./savefile.json";
 var getsave=function(){
 var res=fileio.file_get_contents(libmain.savepath);
 if(res===false){
-console.warn("warn: cannot get save file. use empty object instead. libmain@L44");
+console.warn("warn: cannot get save file. use empty object instead. libmain@L60");
 return {};
 }
 try{
 res=JSON.parse(res);
 }catch(e){
 console.error(e);
-console.error("error: cannot parse save file as json object. libmain@L51");
+console.error("error: cannot parse save file as json object. libmain@L67");
 return false;
 }
 return res;
@@ -59,12 +75,12 @@ try{
 obj=JSON.stringify(obj);
 }catch(e){
 console.error(e);
-console.error("error: cannot stringify input as json. libmain@L62");
+console.error("error: cannot stringify input as json. libmain@L78");
 return false;
 }
 obj=fileio.file_put_contents(libmain.savepath,obj);
 if(obj===false){
-console.error("error: cannot write save file. libmain@L67");
+console.error("error: cannot write save file. libmain@L83");
 return false;
 }
 return true;
@@ -73,7 +89,7 @@ return true;
 libmain.sign=function(uid,gid,reply){
 var sf=getsave();
 if(sf===false){
-reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L76");
+reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L92");
 return;
 }
 if(!(gid in sf)){
@@ -120,7 +136,7 @@ sf[gid][uid]["scores"]+=addscore;
 res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧";
 sf=setsave(sf);
 if(sf===false){
-reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L123");
+reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L139");
 return;
 }
 reply(res);
@@ -130,10 +146,10 @@ return;
 libmain.myscore=function(uid,gid){
 var sf=getsave();
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L133";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L149";
 }
 if(!(gid in sf)||!(uid in sf[gid])){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L136";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L152";
 }
 return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["scores"];
 };
@@ -141,10 +157,10 @@ return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"你当前拥有积�
 libmain.group_ranking=function(gid){
 var sf=getsave();
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L144";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L160";
 }
 if(!(gid in sf)){
-return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L147";
+return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L163";
 }
 var arr=[];
 var kl=Object.keys(sf[gid]);
