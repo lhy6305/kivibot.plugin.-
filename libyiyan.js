@@ -89,10 +89,16 @@ return resp;
 return resp;
 };
 
-libyiyan.get=function(callback){
+libyiyan.get=function(callback,prefix_msg,suffix_msg){
 if(typeof callback!="function"){
 console.error("[libyiyan] error: type of arguments[0] (callback) is not Function.");
 return false;
+}
+if(arguments.length<2||typeof prefix_msg!="string"){
+prefix_msg="";
+}
+if(arguments.length<3||typeof suffix_msg!="string"){
+suffix_msg="";
 }
 httphelper.send("https://v1.hitokoto.cn/?encode=json&charset=utf-8","GET","",function(data,req){
 var resp="";
@@ -131,11 +137,11 @@ console.error(e);
 }
 console.error("[libyiyan] 无法解析api返回值为json，上面应该有报错细节吧...");
 console.warn("[libyiyan] 正在尝试使用本地fallback");
-callback(libyiyan.get_fallback());
+callback(prefix_msg+libyiyan.get_fallback()+suffix_msg);
 return;
 }
 
-callback(resp);
+callback(prefix_msg+resp+suffix_msg);
 return;
 });
 };
