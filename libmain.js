@@ -139,7 +139,7 @@ if(sf===false){
 reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L139");
 return;
 }
-libyiyan.get(reply,res);
+libyiyan.get(reply,res+"\r\n");
 return;
 };
 
