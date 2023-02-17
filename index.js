@@ -4,7 +4,7 @@ const libmsg = require("./libmsg.js");
 const info = {
     name: "积分签到",
     author: "ly65",
-    version: "1.2.0"
+    version: "1.0.0"
 };
 
 

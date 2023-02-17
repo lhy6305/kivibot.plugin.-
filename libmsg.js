@@ -129,8 +129,7 @@ libmain.savepath=__dirname+"/"+"savefile.json";
 
 if(cdata["type"]=="text"&&cdata["data"]["text"].startsWith("签到")){
 try{
-var res=libmain.sign(uid,gid);
-jo.reply(res);
+libmain.sign(uid,gid,jo.reply);
 }catch(e){
 console.error(e);
 jo.reply("😣💦你干嘛～哈哈～哎哟 func_exec_erro libmsg@L136");

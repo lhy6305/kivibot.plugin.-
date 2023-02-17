@@ -70,10 +70,11 @@ return false;
 return true;
 };
 
-libmain.sign=function(uid,gid){
+libmain.sign=function(uid,gid,reply){
 var sf=getsave();
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L76";
+reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L76");
+return;
 }
 if(!(gid in sf)){
 sf[gid]={};
@@ -101,7 +102,8 @@ if(sf[gid][uid]["lastsign"]<todayzero){
 flag_cansign=true;
 }
 if(!flag_cansign){
-return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"今天已经签过了";
+libyiyan.get(reply,sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"今天已经签过了\r\n");
+return;
 }
 sf[gid][uid]["lastsign"]=Number((Date.now()/100000).toFixed(0));
 sf[gid][uid]["continue"]=Math.max(0,sf[gid][uid]["continue"]);
@@ -118,18 +120,20 @@ sf[gid][uid]["scores"]+=addscore;
 res+="，🧧连签"+sf[gid][uid]["continue"]+"天🧧";
 sf=setsave(sf);
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L120";
+reply(oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_write_fail libmain@L123");
+return;
 }
-return res;
+reply(res);
+return;
 };
 
 libmain.myscore=function(uid,gid){
 var sf=getsave();
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L129";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L133";
 }
 if(!(gid in sf)||!(uid in sf[gid])){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L132";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L136";
 }
 return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"你当前拥有积分"+sf[gid][uid]["scores"];
 };
@@ -137,10 +141,10 @@ return sf[gid][uid]["customTitle"]+oicq.cqcode.at(uid)+" "+"你当前拥有积�
 libmain.group_ranking=function(gid){
 var sf=getsave();
 if(sf===false){
-return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L140";
+return oicq.cqcode.at(uid)+" "+"😣💦你干嘛～哈哈～哎哟 file_read_fail libmain@L144";
 }
 if(!(gid in sf)){
-return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L143";
+return "😣💦你干嘛～哈哈～哎哟，先签个到吧 no_such_key libmain@L147";
 }
 var arr=[];
 var kl=Object.keys(sf[gid]);
