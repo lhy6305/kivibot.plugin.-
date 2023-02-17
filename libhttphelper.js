@@ -112,7 +112,7 @@ res.on("end",function(){
 if(!req_isaborted){
 req_isaborted=true;
 resp=Buffer.concat(resp);
-callback(resp);
+callback(resp,res);
 }
 });
 });
@@ -121,7 +121,7 @@ if(res_time!==false&&res_time!==true&&Date.now()>res_time+5000&&!req_isaborted){
 req_isaborted=true;
 req.abort();
 console.error("timeout while receiving data from "+url.hostname+":"+url.port+". libhttphelper@L123");
-callback(false);
+callback(false,null);
 }
 if(req_isaborted){
 clearInterval(res_timer);
@@ -132,7 +132,7 @@ if(req_time!==false&&Date.now()>req_time+5000&&!req_isaborted){
 req_isaborted=true;
 req.abort();
 console.error("connection to "+url.hostname+":"+url.port+" timeout. libhttphelper@134");
-callback(false);
+callback(false,null);
 }
 if(req_time===false||req_isaborted){
 clearInterval(req_timer);
@@ -143,7 +143,7 @@ if(!req_isaborted){
 req_isaborted=true;
 console.error("request failed with message ["+e.message+"]. libhttphelper@144");
 console.error(e);
-callback(false);
+callback(false,null);
 }
 });
 if(dat.length>0){
