@@ -52,7 +52,8 @@ libyiyan.local_fallback_file=__dirname+"/"+"yiyan_fallback.txt";
 libyiyan.type_map={"a":"动画","b":"漫画","c":"游戏","d":"文学","e":"原创","f":"来自网络","g":"其他","h":"影视","i":"诗词","j":"网易云","k":"哲学","l":"抖机灵"};
 
 libyiyan.get_fallback=function(){
-if(!fileio.is_readable(libyiyan.local_fallback_file){
+if(!fileio.is_readable(libyiyan.local_fallback_file)){
+console.error("[libyiyan] fallback文件"+libyiyan.local_fallback_file+"未找到");
 resp="『呜哇！fallback喵走丢了！jima快来』\r\n";
 resp+="--by 报错 | 来自 libyiyan@L75";
 return resp;
@@ -81,7 +82,6 @@ resp="『呜哇！fallback喵不是喵！它是谁？』\r\n";
 resp+="--by 报错 | 来自 libyiyan@L??";
 return resp;
 }
-}
 return resp;
 };
 
@@ -96,19 +96,28 @@ if(data!==false&&typeof data!="object"){
 try{
 data=JSON.parse(data);
 }catch(e){
-console.error("[libyiyan] 无法解析api返回值为json, check below for details.");
 console.error(data);
 console.error(e);
 data=false;
 }
 }
+try{
 if(data===false){
-console.warn("[libyiyan] 网络请求出错，正在尝试使用本地fallback...");
-callback(libyiyan.get_fallback());
-return;
+throw "";
+}
+if(!("hitokoto" in data)){
+throw "";
 }
 rep="「"++"」\r\n";
 rep+="--by "++" | 来自 "+;
+}catch(e){
+console.error(data);
+console.error("[libyiyan] 无法解析api返回值为json，上面应该有报错细节吧...");
+console.warn("[libyiyan] 正在尝试使用本地fallback");
+callback(libyiyan.get_fallback());
+return;
+}
+
 callback(resp);
 return;
 });
