@@ -49,13 +49,14 @@ httphelper=httphelper_1;
 var libyiyan={};
 libyiyan.local_fallback_file=__dirname+"/"+"yiyan_fallback.txt";
 
-libyiyan.type_map={"a":"动画","b":"漫画","c":"游戏","d":"文学","e":"原创","f":"来自网络","g":"其他","h":"影视","i":"诗词","j":"网易云","k":"哲学","l":"抖机灵"};
+libyiyan.type_map={"a":"动画","b":"漫画","c":"游戏","d":"文学","e":"原创","f":"网络","g":"其他","h":"影视","i":"诗词","j":"网易云","k":"哲学","l":"抖机灵"};
 
 libyiyan.get_fallback=function(){
+var resp="";
 if(!fileio.is_readable(libyiyan.local_fallback_file)){
 console.error("[libyiyan] fallback文件"+libyiyan.local_fallback_file+"未找到");
 resp="『呜哇！fallback喵走丢了！jima喵快来』\r\n";
-resp+="--by 报错 | 来自 libyiyan@L58";
+resp+="--by 报错 | 来自 libyiyan@L59";
 return resp;
 }
 try{
@@ -74,12 +75,15 @@ a--;
 }
 data=data[Math.round(Math.random()*data.length)];
 data=data.split("|");
-rep="『"+data[2]+"』\r\n";
-rep+="--by "+data[0]+" | 来自 "+data[1];
+if(data.length<3){
+throw "";
+}
+resp="『"+data[2]+"』\r\n";
+resp+="--by "+data[0]+" | 来自 "+data[1];
 }catch(e){
 console.error("[libyiyan] fallback文件"+libyiyan.local_fallback_file+"无法正常解析");
 resp="『呜哇！fallback喵不是喵！它是谁？』\r\n";
-resp+="--by 报错 | 来自 libyiyan@L82";
+resp+="--by 报错 | 来自 libyiyan@L86";
 return resp;
 }
 return resp;
@@ -116,7 +120,7 @@ data["from"]=data["from_who"];
 throw "[libyiyan] \"from\" is not in the data object.";
 }
 var type="动画？";
-if("type" in data["type"]&&data["type"] in libyiyan.type_map){
+if("type" in data&&data["type"] in libyiyan.type_map){
 type=libyiyan.type_map[data["type"]];
 }
 resp+="--by "+data["from"]+" | 来自 "+type;
